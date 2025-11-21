@@ -14,13 +14,33 @@ async function getWeather() {
             return;
         }
 
+        // 🌤️ Custom weather messages go HERE
+        let message = "";
+        if (data.weather[0].main === "Snow") {
+             "❄️ Wow snow! ☃️";
+        } 
+        else if (data.weather[0].main === "Clear") {
+            message = "🌞 perfect time to go to the beach 🏖️";
+        }
+        else if (data.weather[0].main === "Rain") {
+            message = "🌧️ Grab an umbrella!";
+        }
+        else if (data.weather[0].main === "Clouds") {
+            message = "☁️ Kinda cloudy today.";
+        }
+        else {
+            message = "🌍 Interesting weather!";
+        }
+
         const output =
 `Location: ${data.name}
 Weather: ${data.weather[0].description}
 Temperature: ${data.main.temp} °C
 Feels Like: ${data.main.feels_like} °C
 Wind Speed: ${data.wind.speed} mph
-Visibility: ${data.visibility} meters away`;
+Visibility: ${data.visibility} meters away
+
+Message: ${message}`;
 
         document.getElementById("result").innerText = output;
     }
@@ -28,22 +48,4 @@ Visibility: ${data.visibility} meters away`;
         document.getElementById("result").innerText =
             "Error loading weather.";
     }
-}
-
-let message = "";
-
-if (data.weather[0].main === "Snow") {
-    message = "❄️ Wow snow! ☃️";
-} 
-else if (data.weather[0].main === "Clear") {
-    message = "🌞 perfect time to go to the beach 🏖️";
-}
-else if (data.weather[0].main === "Rain") {
-    message = "🌧️ Grab an umbrella!";
-}
-else if (data.weather[0].main === "Clouds") {
-    message = "☁️ Kinda cloudy today.";
-}
-else {
-    message = "🌍 Interesting weather!";
 }
